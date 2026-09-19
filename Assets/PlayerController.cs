@@ -1,17 +1,22 @@
 
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float bounceForce = 10f;
 
+    public TextMeshProUGUI coinText;
+
     private Rigidbody rb;
     private Vector3 movement;
+    private int coins = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        UpdateCoinText();
     }
 
     void Update()
@@ -37,6 +42,23 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity.z
             );
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            coins++;
+
+            UpdateCoinText();
+
+            Destroy(other.gameObject);
+        }
+    }
+
+    void UpdateCoinText()
+    {
+        coinText.text = "Coins: " + coins;
     }
 }
 
