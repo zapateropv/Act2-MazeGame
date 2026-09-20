@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float bounceForce = 10f;
+    public Timer timer;
 
     public TextMeshProUGUI coinText;
 
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity.z
             );
         }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,10 +53,13 @@ public class PlayerController : MonoBehaviour
         {
             coins++;
 
+            timer.AddTime(5f);
+
             UpdateCoinText();
 
             Destroy(other.gameObject);
         }
+
     }
 
     void UpdateCoinText()
