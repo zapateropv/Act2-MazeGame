@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using TMPro;
 
@@ -6,14 +7,20 @@ public class Timer : MonoBehaviour
     public float timeLeft = 90f;
     public TMP_Text timerText;
 
+    private bool timerRunning = true;
+
     void Start()
     {
         timerText = GameObject.Find("TimerText").GetComponent<TMP_Text>();
+
         UpdateTimerText();
     }
 
     void Update()
     {
+        if (!timerRunning)
+            return;
+
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
@@ -36,6 +43,12 @@ public class Timer : MonoBehaviour
     public void AddTime(float seconds)
     {
         timeLeft += seconds;
+
+        UpdateTimerText();
     }
 
+    public void StopTimer()
+    {
+        timerRunning = false;
+    }
 }
