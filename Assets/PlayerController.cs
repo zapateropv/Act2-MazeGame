@@ -1,6 +1,6 @@
-
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity.z
             );
         }
+        if (collision.gameObject.CompareTag("Hazard"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
 
     }
@@ -67,4 +71,3 @@ public class PlayerController : MonoBehaviour
         coinText.text = "Coins: " + coins;
     }
 }
-
