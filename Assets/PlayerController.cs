@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float bounceForce = 10f;
+    public TextMeshProUGUI finalTimeText;
 
     public Timer timer;
 
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
             coins++;
 
             // Add 5 seconds to timer
-            timer.AddTime(5f);
+            timer.AddTime(3f);
 
             UpdateCoinText();
 
@@ -78,22 +79,18 @@ public class PlayerController : MonoBehaviour
 
     void WinGame()
     {
-        // Show Win Panel
         winPanel.SetActive(true);
 
-        // Show "YOU WON!"
         winText.text = "YOU WON!";
 
-        // Show total coins
         totalCoinsText.text = "Total Coins Collected: " + coins;
 
-        // Stop timer
+        finalTimeText.text = "Time Remaining: " + timer.timeLeft.ToString("F1") + " seconds";
+
         timer.StopTimer();
 
-        // Stop player movement
         rb.linearVelocity = Vector3.zero;
 
-        // Freeze the game
         Time.timeScale = 0f;
     }
 
